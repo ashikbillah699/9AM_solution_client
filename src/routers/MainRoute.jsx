@@ -6,15 +6,15 @@ import SignUp from "../pages/authentication/SignUp";
 const route = createBrowserRouter([
     {
         path: '/',
-        element: <MainLayout></MainLayout>
-    },
-    {
-        path: '/login',
         element: <Login></Login>
     },
     {
         path: '/signUp',
         element: <SignUp></SignUp>
+    },
+    {
+        path: '/mainLayout',
+        element: <MainLayout></MainLayout>
     }
 ])
 

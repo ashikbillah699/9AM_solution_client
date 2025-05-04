@@ -1,12 +1,12 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useState } from 'react';
 import auth from '../firebase/firebase.config';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
 export const AuthContext = createContext(null)
 
 const AuthProvider = ({ children }) => {
-    const [showDashboard, setShowDashboard] = useState(false)
+    const [showDashboard, setShowDashboard] = useState(true)
 
     // signup
     const createSignUp = (email, password) =>{
@@ -18,11 +18,17 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password);
     }
 
+    // log out
+    const createLogOut = () =>{
+        return signOut(auth)
+    }
+
     const authInfo = {
         setShowDashboard,
         showDashboard,
         createSignUp,
-        createLogin
+        createLogin,
+        createLogOut
     }
 
     return (

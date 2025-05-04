@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import loginBg from '../../assets/loginBg.jpg'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 import Swal from 'sweetalert2';
 
 const Login = () => {
     const { createLogin } = useContext(AuthContext);
+    const navigate = useNavigate()
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -24,6 +25,7 @@ const Login = () => {
                     timer: 1400
                 });
                 event.target.reset()
+                navigate('/mainLayout')
             }
         }
         catch (err) {
@@ -37,8 +39,9 @@ const Login = () => {
     }
 
     return (
-        <div className="flex justify-center items-center min-h-screen p-4"
+        <div className="flex flex-col gap-4 justify-center items-center min-h-screen p-4"
             style={{ backgroundImage: `url(${loginBg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                <h1 className='text-[#2e4f96] px-4 sm:px-0 text-2xl md:text-3xl font-bold mb-6 text-center'>Access your  <span className='text-[#122b5f]'>Task Flow</span> workspace – Login or Sign up.</h1>
             <div className="flex shadow-2xl rounded-lg w-full max-w-4xl overflow-hidden"
                 style={{ backgroundImage: `url(${loginBg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
 
@@ -86,7 +89,7 @@ const Login = () => {
 
                         {/* Submit Button */}
                         <div>
-                            <button className="btn bg-yellow-600 text-white w-full hover:bg-yellow-700">
+                            <button className="btn bg-blue-600 text-white w-full hover:bg-blue-700">
                                 Sign In
                             </button>
                         </div>
@@ -97,7 +100,7 @@ const Login = () => {
                         New here?{" "}
                         <Link
                             to="/signUp"
-                            className="text-yellow-500 font-medium hover:underline"
+                            className="text-blue-500 font-medium hover:underline"
                         >
                             Create a New Account
                         </Link>

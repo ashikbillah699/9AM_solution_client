@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import loginBg from '../../assets/loginBg.jpg'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 import Swal from 'sweetalert2';
 
 const SignUp = () => {
     const { createSignUp } = useContext(AuthContext);
+    const navigate = useNavigate()
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -26,6 +27,7 @@ const SignUp = () => {
                     timer: 1400
                 });
                 event.target.reset()
+                navigate('/mainLayout')
             }
         }
         catch (err) {
@@ -112,7 +114,7 @@ const SignUp = () => {
 
                         {/* Submit Button */}
                         <div>
-                            <button className="btn bg-yellow-600 text-white w-full hover:bg-yellow-700">
+                            <button className="btn bg-blue-600 text-white w-full hover:bg-blue-700">
                                 Sign Up
                             </button>
                         </div>
@@ -121,7 +123,7 @@ const SignUp = () => {
                     {/* New Account */}
                     <p className="text-center text-sm mt-4">
                         New here?{" "}
-                        <Link to="/login" className="text-yellow-500 font-medium hover:underline">
+                        <Link to="/" className="text-blue-500 font-medium hover:underline">
                             if you have an Account.
                         </Link>
                     </p>
