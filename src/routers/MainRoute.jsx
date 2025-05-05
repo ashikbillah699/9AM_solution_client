@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import Login from "../pages/authentication/Login";
 import SignUp from "../pages/authentication/SignUp";
+import DashboardHome from "../pages/dashboard/DashboardHome";
+import CreateTask from "../pages/createTask/CreateTask";
 
 const route = createBrowserRouter([
     {
@@ -14,7 +16,17 @@ const route = createBrowserRouter([
     },
     {
         path: '/mainLayout',
-        element: <MainLayout></MainLayout>
+        element: <MainLayout></MainLayout>,
+        children:[
+            {
+                path:'dashboardHome',
+                element: <DashboardHome></DashboardHome>
+            },
+            {
+                path: 'createTask',
+                element: <CreateTask></CreateTask>
+            },
+        ]
     }
 ])
 

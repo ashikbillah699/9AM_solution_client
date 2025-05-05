@@ -5,7 +5,7 @@ import { AuthContext } from '../../provider/AuthProvider';
 import Swal from 'sweetalert2';
 
 const SignUp = () => {
-    const { createSignUp } = useContext(AuthContext);
+    const { createSignUp, userProfile } = useContext(AuthContext);
     const navigate = useNavigate()
 
     const handleSubmit = async (event) => {
@@ -16,9 +16,12 @@ const SignUp = () => {
         const password = event.target.password.value;
         console.log(name, photoURL, email, password);
 
+
+
         try {
             const res = await createSignUp(email, password)
             if (res.user) {
+                await userProfile(name, photoURL)
                 Swal.fire({
                     position: "center",
                     icon: "success",
@@ -31,6 +34,7 @@ const SignUp = () => {
             }
         }
         catch (err) {
+            console.log(err)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",

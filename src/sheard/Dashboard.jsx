@@ -2,13 +2,13 @@ import React, { useContext } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
 import { AiFillDashboard } from 'react-icons/ai';
-import { IoIosCreate } from 'react-icons/io';
+import { IoIosCreate, IoIosNotifications } from 'react-icons/io';
 import { MdAssignment } from 'react-icons/md';
 import { HiUsers } from 'react-icons/hi';
 import { RiLogoutCircleFill } from 'react-icons/ri';
 
 const Dashboard = () => {
-    const { showDashboard, createLogOut } = useContext(AuthContext)
+    const { showDashboard, createLogOut, user } = useContext(AuthContext)
     const navigate = useNavigate()
 
     const handleLogout = () => {
@@ -25,15 +25,13 @@ const Dashboard = () => {
                     {
                         showDashboard &&
                         <div>
-                            <div className='border border-white rounded-full w-24 h-24 mx-auto mt-6'>
-                                <img src="" alt="" />
-                            </div>
-                            <p className='text-center text-white font-bold mt-1'>@admin</p>
+                            <img className='border border-white rounded-full w-24 h-24 mx-auto mt-6' src={`${user?.photoURL}`} alt="" />
+                            <p className='text-center text-white font-bold mt-1'>{user?.displayName}</p>
                         </div>
                     }
                     <ul className=" flex flex-col space-y-8 md:justify-start md:items-start items-center md:sticky top-44 py-5">
                         <li>
-                            <NavLink to='/deshboard/admin'
+                            <NavLink to='dashboardHome'
                                 className="text-xl hover:text-[#21587a] text-white duration-300 flex items-center justify-start gap-3">
                                 <span className="min-w-[32px] flex justify-center">
                                     <AiFillDashboard className='w-8 h-8' />
@@ -42,7 +40,7 @@ const Dashboard = () => {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to='/deshboard/addItems'
+                            <NavLink to='createTask'
                                 className="text-xl hover:text-[#21587a] text-white duration-300 flex items-center justify-start gap-3">
                                 <span className="min-w-[32px] flex justify-center">
                                     <IoIosCreate className='w-8 h-8' />
@@ -51,34 +49,28 @@ const Dashboard = () => {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to='/deshboard/manageItems'
+                            <NavLink to='dashboardHome'
                                 className="text-xl hover:text-[#21587a] text-white duration-300 flex items-center justify-start gap-3">
                                 <span className="min-w-[32px] flex justify-center">
-                                    <MdAssignment className='w-8 h-8' />
+                                    <IoIosNotifications className='w-8 h-8' />
                                 </span>
-                                <span className="whitespace-nowrap md:inline-block">{showDashboard && "Assign Task"}</span>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to='/deshboard/manageBooking'
-                                className="text-xl hover:text-[#21587a] text-white duration-300 flex items-center justify-start gap-3">
-                                <span className="min-w-[32px] flex justify-center">
-                                    <HiUsers className='w-8 h-8' />
-                                </span>
-                                <span className="whitespace-nowrap md:inline-block">{showDashboard && "Users"}</span>
+                                <span className="whitespace-nowrap md:inline-block">{showDashboard && "Notification"}</span>
                             </NavLink>
                         </li>
                         <li>
                             <NavLink onClick={handleLogout}
-                                className="md:hidden  text-xl hover:text-[#21587a] text-white duration-300 flex items-center justify-start gap-3">
-                                <RiLogoutCircleFill className='w-8 h-8' /> logOut
+                                className="text-xl hover:text-[#21587a] text-white duration-300 flex items-center justify-start gap-3">
+                                <span className="min-w-[32px] flex justify-center">
+                                    <RiLogoutCircleFill className='w-8 h-8' />
+                                </span>
+                                <span className="whitespace-nowrap md:inline-block">{showDashboard && "logOut"}</span>
                             </NavLink>
                         </li>
                     </ul>
                 </div>
 
                 {/* Main Content */}
-                <div className={`w-full rounded ${showDashboard ? "lg:w-5/6 px-6" : "lg:w-full px-6"}`}>
+                <div className={`w-full rounded ${showDashboard ? "lg:w-5/6 p-6" : "lg:w-full p-6"}`}>
                     <Outlet />
                 </div>
             </div>
