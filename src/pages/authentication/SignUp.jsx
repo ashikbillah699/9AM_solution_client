@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 const SignUp = () => {
     const { createSignUp, userProfile } = useContext(AuthContext);
     const navigate = useNavigate()
+   
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -30,8 +31,21 @@ const SignUp = () => {
                     timer: 1400
                 });
                 event.target.reset()
-                navigate('/mainLayout')
+                navigate('/mainLayout/dashboardHome')
+                // insert user data
+                const result = await fetch(`http://localhost:5000/user`, {
+                    method: "POST",
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(res.user)
+                })
+                const data = await result.json();
+                console.log(data)
             }
+
+
+
         }
         catch (err) {
             console.log(err)

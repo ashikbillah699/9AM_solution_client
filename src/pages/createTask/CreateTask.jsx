@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../provider/AuthProvider';
+import useUser from '../../hooks/useUser';
 
 const CreateTask = () => {
+    const {user} = useContext(AuthContext);
+    const [users] = useUser();
     const handleSubmit = async (event) => {
         event.preventDefault();
         const form = event.target;
@@ -10,7 +14,9 @@ const CreateTask = () => {
         const dueDate = form.dueDate.value;
         const priority = form.priority.value;
         const status = form.status.value;
-        const taskData = { title, description, dueDate, priority, status };
+        const assignedEmail = form.assignedEmail.value
+        const userEmail = user?.email
+        const taskData = { title, description, dueDate, priority, status, assignedEmail, userEmail };
         console.log(taskData);
 
         try {
@@ -81,6 +87,14 @@ const CreateTask = () => {
                     <option value="Pending">Pending</option>
                     <option value="Ongoing">Ongoing</option>
                     <option value="Completed">Completed</option>
+                </select>
+                <select name="assignedEmail" className="select select-bordered w-full" defaultValue="" required>
+                    <option value="" disabled selected>Assigned email</option>
+                    {
+                        users.map(assignedUser => <option key={assignedUser._id} value={`${assignedUser?.email}`}>
+                            {assignedUser.email}
+                        </option>)
+                    }
                 </select>
                 <button type="submit" className="btn btn-primary w-full">Create Task</button>
             </form>
