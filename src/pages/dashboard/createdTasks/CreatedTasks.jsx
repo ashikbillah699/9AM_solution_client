@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import useTasks from '../../../hooks/useTasks';
 import { AuthContext } from '../../../provider/AuthProvider';
 import { FaEdit, FaTrash } from 'react-icons/fa';
@@ -8,7 +8,19 @@ import Swal from 'sweetalert2';
 const CreatedTasks = () => {
     const { user } = useContext(AuthContext)
     const [tasks, refetch] = useTasks()
-    const createdtask = tasks.filter(task => task.userEmail == user?.email);
+    const [searchTerm, setSearchTerm] = useState(''); 
+    const [statusFilter, setStatusFilter] = useState(''); 
+    const [priorityFilter, setPriorityFilter] = useState('');
+    const [dueDateFilter, setDueDateFilter] = useState('');
+
+    const createdtask = tasks.filter(task =>
+        task.userEmail === user?.email &&
+        task.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        (statusFilter ? task.status === statusFilter : true) &&
+        (priorityFilter ? task.priority === priorityFilter : true) &&
+        (dueDateFilter ? new Date(task.dueDate).toLocaleDateString() === new Date(dueDateFilter).toLocaleDateString() : true)
+    );
+
     const navigate = useNavigate()
 
     // Task update
@@ -52,11 +64,54 @@ const CreatedTasks = () => {
             }
         });
     }
+
     refetch()
 
     return (
         <div className="overflow-x-auto w-full">
             <h1 className='text-2xl mb-3 font-bold'>Created Tasks</h1>
+            {/* Filters */}
+            <div className="flex gap-4 mb-4">
+                <label className="input input-bordered flex items-center gap-2">
+                    <input
+                        type="text"
+                        className="grow"
+                        placeholder="Search"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                </label>
+                <select
+                    className="input input-bordered"
+                    value={statusFilter}
+                    onChange={(e) => setStatusFilter(e.target.value)}
+                >
+                    <option value="">All Status</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                </select>
+
+                <select
+                    className="input input-bordered"
+                    value={priorityFilter}
+                    onChange={(e) => setPriorityFilter(e.target.value)}
+                >
+                    <option value="">All Priority</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+
+                <input
+                    type="date"
+                    className="input input-bordered"
+                    value={dueDateFilter}
+                    onChange={(e) => setDueDateFilter(e.target.value)}
+                />
+            </div>
+
+            {/* Table */}
             <table className="table table-zebra w-full">
                 {/* Table Head */}
                 <thead className="bg-base-200">
@@ -76,8 +131,8 @@ const CreatedTasks = () => {
                             <th>{index + 1}</th>
                             <td className="max-w-[150px] break-words">{task.title}</td>
                             <td>{new Date(task.dueDate).toLocaleDateString()}</td>
-                            <td> <span>{task.priority} </span> </td>
-                            <td> <span >{task.status}</span></td>
+                            <td><span>{task.priority}</span></td>
+                            <td><span>{task.status}</span></td>
                             <td className="flex gap-2 justify-center">
                                 <button
                                     onClick={() => handleEdit(task)}
