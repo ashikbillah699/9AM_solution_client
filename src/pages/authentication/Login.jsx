@@ -25,7 +25,7 @@ const Login = () => {
                     timer: 1400
                 });
                 event.target.reset()
-                navigate('/mainLayout/dashboardHome')
+                navigate('/mainLayout/createTask')
             }
         }
         catch (err) {

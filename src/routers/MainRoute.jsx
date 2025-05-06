@@ -4,6 +4,9 @@ import Login from "../pages/authentication/Login";
 import SignUp from "../pages/authentication/SignUp";
 import DashboardHome from "../pages/dashboard/DashboardHome";
 import CreateTask from "../pages/createTask/CreateTask";
+import CreatedTasks from "../pages/dashboard/createdTasks/CreatedTasks";
+import AssignedTasks from "../pages/dashboard/assignedTasks/AssignedTasks";
+import OverdueTasks from "../pages/dashboard/overdueTasks/OverdueTasks";
 
 const route = createBrowserRouter([
     {
@@ -17,13 +20,25 @@ const route = createBrowserRouter([
     {
         path: '/mainLayout',
         element: <MainLayout></MainLayout>,
-        children:[
+        children: [
             {
-                path:'/mainLayout/dashboardHome',
+                path: '/mainLayout/dashboardHome',
                 element: <DashboardHome></DashboardHome>
             },
             {
-                path: 'createTask',
+                path: '/mainLayout/createdTasks',
+                element: <CreatedTasks></CreatedTasks>
+            }, 
+            {
+                path: '/mainLayout/assignedTasks',
+                element: <AssignedTasks></AssignedTasks>
+            },
+            {
+                path: '/mainLayout/overdueTasks',
+                element: <OverdueTasks></OverdueTasks>
+            },
+            {
+                path: '/mainLayout/createTask',
                 element: <CreateTask></CreateTask>
             },
         ]

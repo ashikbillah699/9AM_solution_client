@@ -31,7 +31,7 @@ const SignUp = () => {
                     timer: 1400
                 });
                 event.target.reset()
-                navigate('/mainLayout/dashboardHome')
+                navigate('/mainLayout/createTask')
                 // insert user data
                 const result = await fetch(`http://localhost:5000/user`, {
                     method: "POST",

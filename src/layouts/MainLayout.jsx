@@ -12,7 +12,6 @@ const MainLayout = () => {
             <div>
                 <Dashboard></Dashboard>
             </div>
-            
         </div>
     );
 };
