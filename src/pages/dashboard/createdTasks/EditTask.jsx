@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import useUser from '../../../hooks/useUser';
 import Swal from 'sweetalert2';
-import { AuthContext } from '../../provider/AuthProvider';
-import useUser from '../../hooks/useUser';
-import { useNavigate } from 'react-router-dom';
 
-const CreateTask = () => {
-    const { user } = useContext(AuthContext);
+const EditTask = () => {
+    const location = useLocation();
+    const { task } = location.state || {};
     const [users] = useUser();
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -18,24 +18,24 @@ const CreateTask = () => {
         const priority = form.priority.value;
         const status = form.status.value;
         const assignedEmail = form.assignedEmail.value
-        const userEmail = user?.email
-        const taskData = { title, description, dueDate, priority, status, assignedEmail, userEmail };
+        const userEmail = task.userEmail
+        const updatedTaskData = { title, description, dueDate, priority, status, assignedEmail, userEmail };
 
         try {
-            const res = await fetch(`http://localhost:5000/task`, {
-                method: "POST",
+            const response = await fetch(`http://localhost:5000/task/${task._id}`, {
+                method: 'PUT',
                 headers: {
-                    'content-type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(taskData)
-            })
-            const data = await res.json();
+                body: JSON.stringify(updatedTaskData),
+            });
 
-            if (data.acknowledged) {
+            const data = await response.json();
+            if (data.modifiedCount) {
                 Swal.fire({
-                    title: "Task Submitted Successfully!",
+                    title: "Task updated Successfully!",
                     icon: "success",
-                    text: "Your task has been added to the list.",
+                    text: "Your task has been updated to the list.",
                     draggable: true
                 });
                 form.reset();
@@ -49,15 +49,15 @@ const CreateTask = () => {
                 text: `${err.message}`
             });
         }
-
     }
 
     return (
         <div className="max-w-md mx-auto p-4 rounded-xl">
-            <h2 className="text-2xl font-semibold mb-4 text-center">Create New Task</h2>
+            <h2 className="text-2xl font-semibold mb-4 text-center">Update Task</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
 
                 <input
+                    defaultValue={task.title}
                     type="text"
                     name="title"
                     placeholder="Task Title"
@@ -66,6 +66,7 @@ const CreateTask = () => {
                 />
 
                 <textarea
+                    defaultValue={task.description}
                     name="description"
                     placeholder="Task Description"
                     className="textarea textarea-bordered w-full"
@@ -73,26 +74,27 @@ const CreateTask = () => {
                 ></textarea>
 
                 <input
+                    defaultValue={task.dueDate}
                     type="date"
                     name="dueDate"
                     className="input input-bordered w-full"
                     required
                 />
 
-                <select name="priority" className="select select-bordered w-full" defaultValue="" required>
+                <select name="priority" className="select select-bordered w-full" defaultValue={task.priority} required>
                     <option value="" disabled>Set Priority</option>
                     <option value="High">High</option>
                     <option value="Medium">Medium</option>
                     <option value="Low">Low</option>
                 </select>
 
-                <select name="status" className="select select-bordered w-full" defaultValue="" required>
+                <select name="status" className="select select-bordered w-full" defaultValue={task.status} required>
                     <option value="" disabled>Set Status</option>
                     <option value="Pending">Pending</option>
                     <option value="Ongoing">Ongoing</option>
                     <option value="Completed">Completed</option>
                 </select>
-                <select name="assignedEmail" className="select select-bordered w-full" defaultValue="" required>
+                <select name="assignedEmail" className="select select-bordered w-full" defaultValue={task.assignedEmail} required>
                     <option value="" disabled selected>Assigned email</option>
                     {
                         users.map(assignedUser => <option key={assignedUser._id} value={`${assignedUser?.email}`}>
@@ -100,10 +102,10 @@ const CreateTask = () => {
                         </option>)
                     }
                 </select>
-                <button type="submit" className="btn btn-primary w-full">Create Task</button>
+                <button type="submit" className="btn btn-primary w-full">Update Task</button>
             </form>
         </div>
     );
 };
 
-export default CreateTask;
+export default EditTask;

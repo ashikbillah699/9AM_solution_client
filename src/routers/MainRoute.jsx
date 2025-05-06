@@ -7,6 +7,7 @@ import CreateTask from "../pages/createTask/CreateTask";
 import CreatedTasks from "../pages/dashboard/createdTasks/CreatedTasks";
 import AssignedTasks from "../pages/dashboard/assignedTasks/AssignedTasks";
 import OverdueTasks from "../pages/dashboard/overdueTasks/OverdueTasks";
+import EditTask from "../pages/dashboard/createdTasks/EditTask";
 
 const route = createBrowserRouter([
     {
@@ -28,7 +29,7 @@ const route = createBrowserRouter([
             {
                 path: '/mainLayout/createdTasks',
                 element: <CreatedTasks></CreatedTasks>
-            }, 
+            },
             {
                 path: '/mainLayout/assignedTasks',
                 element: <AssignedTasks></AssignedTasks>
@@ -36,6 +37,10 @@ const route = createBrowserRouter([
             {
                 path: '/mainLayout/overdueTasks',
                 element: <OverdueTasks></OverdueTasks>
+            },
+            {
+                path: '/mainLayout/editTask',
+                element: <EditTask></EditTask>
             },
             {
                 path: '/mainLayout/createTask',
