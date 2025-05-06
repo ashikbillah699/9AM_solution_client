@@ -4,9 +4,14 @@ import { CiMenuFries } from 'react-icons/ci';
 import { AuthContext } from '../provider/AuthProvider';
 import { RxCross1 } from 'react-icons/rx';
 import { IoIosNotifications } from 'react-icons/io';
+import useNotification from '../hooks/useNotification';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const { setShowDashboard, showDashboard } = useContext(AuthContext)
+    const [notifications] = useNotification();
+    const unreadNotifications = notifications.filter(notification => !notification.isRead);
+
 
     return (
         <div>
@@ -22,8 +27,14 @@ const Navbar = () => {
                     </div>
                     <div className="flex-none mt-2">
                         <div className="indicator">
-                            <span className="indicator-item badge badge-secondary">99+</span>
-                        <IoIosNotifications className='text-white h-9 w-9' />
+                            <Link to="/mainLayout/notifications" className="relative">
+                                {unreadNotifications.length > 0 && (
+                                    <span className="indicator-item badge badge-secondary">
+                                        {unreadNotifications.length}
+                                    </span>
+                                )}
+                                <IoIosNotifications className="text-white h-9 w-9" />
+                            </Link>
                         </div>
                     </div>
                 </div>

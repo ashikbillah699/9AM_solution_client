@@ -49,7 +49,7 @@ const Dashboard = () => {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to='dashboardHome'
+                            <NavLink to='notifications'
                                 className="text-xl hover:text-[#21587a] text-white duration-300 flex items-center justify-start gap-3">
                                 <span className="min-w-[32px] flex justify-center">
                                     <IoIosNotifications className='w-8 h-8' />

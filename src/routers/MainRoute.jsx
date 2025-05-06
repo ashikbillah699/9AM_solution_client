@@ -8,6 +8,7 @@ import CreatedTasks from "../pages/dashboard/createdTasks/CreatedTasks";
 import AssignedTasks from "../pages/dashboard/assignedTasks/AssignedTasks";
 import OverdueTasks from "../pages/dashboard/overdueTasks/OverdueTasks";
 import EditTask from "../pages/dashboard/createdTasks/EditTask";
+import Notifications from "../pages/Notifications";
 
 const route = createBrowserRouter([
     {
@@ -46,6 +47,10 @@ const route = createBrowserRouter([
                 path: '/mainLayout/createTask',
                 element: <CreateTask></CreateTask>
             },
+            {
+                path: '/mainLayout/notifications',
+                element: <Notifications></Notifications>
+            }
         ]
     }
 ])

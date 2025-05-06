@@ -40,6 +40,14 @@ const CreateTask = () => {
                 });
                 form.reset();
                 navigate('/mainLayout/createdTasks')
+
+                // send Notification
+                const newres = await fetch(`http://localhost:5000/notifications/${assignedEmail}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(taskData),
+                });
+                console.log(newres)
             }
         }
         catch (err) {
