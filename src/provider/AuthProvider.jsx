@@ -8,7 +8,6 @@ export const AuthContext = createContext(null)
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [showDashboard, setShowDashboard] = useState(true)
-    console.log(user)
 
     // signup
     const createSignUp = (email, password) =>{

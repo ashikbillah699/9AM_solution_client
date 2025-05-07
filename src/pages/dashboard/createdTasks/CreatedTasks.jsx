@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import useTasks from '../../../hooks/useTasks';
 import { AuthContext } from '../../../provider/AuthProvider';
 import { FaEdit, FaTrash } from 'react-icons/fa';
@@ -7,21 +7,20 @@ import Swal from 'sweetalert2';
 
 const CreatedTasks = () => {
     const { user } = useContext(AuthContext)
+    const navigate = useNavigate()
     const [tasks, refetch] = useTasks()
-    const [searchTerm, setSearchTerm] = useState(''); 
-    const [statusFilter, setStatusFilter] = useState(''); 
+    const [searchTerm, setSearchTerm] = useState('');
+    const [statusFilter, setStatusFilter] = useState('');
     const [priorityFilter, setPriorityFilter] = useState('');
     const [dueDateFilter, setDueDateFilter] = useState('');
 
     const createdtask = tasks.filter(task =>
         task.userEmail === user?.email &&
-        task.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        (task?.title || "").toLowerCase().includes(searchTerm.toLowerCase()) &&
         (statusFilter ? task.status === statusFilter : true) &&
         (priorityFilter ? task.priority === priorityFilter : true) &&
         (dueDateFilter ? new Date(task.dueDate).toLocaleDateString() === new Date(dueDateFilter).toLocaleDateString() : true)
     );
-
-    const navigate = useNavigate()
 
     // Task update
     const handleEdit = (task) => {
@@ -41,7 +40,7 @@ const CreatedTasks = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await fetch(`http://localhost:5000/task/${id}`, {
+                    await fetch(`https://task-flow-server-pearl.vercel.app/task/${id}`, {
                         method: 'DELETE',
                         headers: {
                             'content-type': 'application/json'
@@ -64,8 +63,9 @@ const CreatedTasks = () => {
             }
         });
     }
-
-    refetch()
+    useEffect(() => {
+        refetch();
+    }, [refetch]);
 
     return (
         <div className="overflow-x-auto w-full">
@@ -151,7 +151,6 @@ const CreatedTasks = () => {
                     ))}
                 </tbody>
             </table>
-
             {createdtask.length === 0 && (
                 <p className="text-center text-gray-400 py-4">No tasks available.</p>
             )}

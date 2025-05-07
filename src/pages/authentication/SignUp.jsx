@@ -7,7 +7,6 @@ import Swal from 'sweetalert2';
 const SignUp = () => {
     const { createSignUp, userProfile } = useContext(AuthContext);
     const navigate = useNavigate()
-   
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -15,9 +14,6 @@ const SignUp = () => {
         const photoURL = event.target.photoURL.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
-        console.log(name, photoURL, email, password);
-
-
 
         try {
             const res = await createSignUp(email, password)
@@ -33,19 +29,15 @@ const SignUp = () => {
                 event.target.reset()
                 navigate('/mainLayout/createTask')
                 // insert user data
-                const result = await fetch(`http://localhost:5000/user`, {
+                const result = await fetch(`https://task-flow-server-pearl.vercel.app/user`, {
                     method: "POST",
                     headers: {
                         'content-type': 'application/json'
                     },
                     body: JSON.stringify(res.user)
                 })
-                const data = await result.json();
-                console.log(data)
+                await result.json();
             }
-
-
-
         }
         catch (err) {
             console.log(err)

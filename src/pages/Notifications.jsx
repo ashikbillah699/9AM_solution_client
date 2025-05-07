@@ -5,18 +5,16 @@ import Swal from 'sweetalert2';
 
 const Notifications = () => {
     const [notifications, refetch] = useNotification();
-    console.log(notifications);
 
     const handleClick = async (id) => {
         try {
-            const response = await fetch(`http://localhost:5000/notification/${id}`, {
+            const response = await fetch(`https://task-flow-server-pearl.vercel.app/notification/${id}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json',
                 },
                 body: JSON.stringify({ isRead: true }),
             });
-
             await response.json();
             refetch()
         }
@@ -28,7 +26,6 @@ const Notifications = () => {
             });
         }
     }
-
 
     return (
         <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -56,6 +53,7 @@ const Notifications = () => {
                     </div>
                 );
             })}
+            {notifications.length == 0 && <div className=" mx-auto text-bold text-gray-400 text-2xl">You have no notifications.</div>}
         </div>
     );
 };

@@ -11,6 +11,7 @@ const CreateTask = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        console.log("submitted");
         const form = event.target;
         const title = form.title.value;
         const description = form.description.value;
@@ -22,7 +23,7 @@ const CreateTask = () => {
         const taskData = { title, description, dueDate, priority, status, assignedEmail, userEmail };
 
         try {
-            const res = await fetch(`http://localhost:5000/task`, {
+            const res = await fetch(`https://task-flow-server-pearl.vercel.app/task`, {
                 method: "POST",
                 headers: {
                     'content-type': 'application/json'
@@ -30,6 +31,7 @@ const CreateTask = () => {
                 body: JSON.stringify(taskData)
             })
             const data = await res.json();
+            console.log( data)
 
             if (data.acknowledged) {
                 Swal.fire({
@@ -42,12 +44,16 @@ const CreateTask = () => {
                 navigate('/mainLayout/createdTasks')
 
                 // send Notification
-                const newres = await fetch(`http://localhost:5000/notifications/${assignedEmail}`, {
+                const notificationData = {
+                    assignedEmail,
+                    title
+                  };
+
+                await fetch(`https://task-flow-server-pearl.vercel.app/notifications/${user?.email}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(taskData),
-                });
-                console.log(newres)
+                    body: JSON.stringify(notificationData), 
+                  });
             }
         }
         catch (err) {

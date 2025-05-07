@@ -14,7 +14,6 @@ const DashboardHome = () => {
     const assignedTask = tasks.filter(task => task.assignedEmail == user?.email)
     const todayDate = new Date()
     const dueDate = tasks.filter(date => new Date(date.dueDate)< todayDate && date.assignedEmail == user?.email)
-    console.log(dueDate)
 
     return (
         <div className='md:grid grid-cols-3 gap-6 space-y-6 md:space-y-0'>

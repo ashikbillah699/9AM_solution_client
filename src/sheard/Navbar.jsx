@@ -9,10 +9,9 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const { setShowDashboard, showDashboard } = useContext(AuthContext)
-    const [notifications] = useNotification();
+    const [notifications,refetch] = useNotification();
     const unreadNotifications = notifications.filter(notification => !notification.isRead);
-
-
+    refetch()
     return (
         <div>
             <div className=" bg-gray-900">

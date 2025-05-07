@@ -1,12 +1,46 @@
-# React + Vite
+# TaskFlower
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-featured task management application built with **React + Vite**, styled using **Tailwind CSS** and **DaisyUI**, backed by **Express.js** and **MongoDB**. Users can create, update, delete, filter, and get notified about tasks in a clean and responsive UI.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Live Site: https://popx-task.web.app/
+## Client code: https://github.com/ashikbillah699/TaskFlow
+## Server code: https://github.com/ashikbillah699/Task_Flow_server
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Technologies Used
+
+### Frontend:
+- React (with Vite)
+- React Router DOM
+- Tailwind CSS
+- DaisyUI
+- SweetAlert2
+- Context API
+- React Icons
+
+### Backend:
+- Node.js
+- Express.js
+- MongoDB
+- CORS & dotenv
+
+---
+
+## Features
+
+✅ User Authentication (Email based)  
+✅ Task Creation with Title, Description, Due Date, Priority, Status  
+✅ Real-Time Task Notifications (Unread badge)  
+✅ Update & Delete functionality  
+✅ Responsive UI (Mobile to Desktop)  
+✅ Filter tasks by:  
+&nbsp;&nbsp;&nbsp;&nbsp; Title or Description (Search)  
+&nbsp;&nbsp;&nbsp;&nbsp; Due Date  
+&nbsp;&nbsp;&nbsp;&nbsp; Status  
+&nbsp;&nbsp;&nbsp;&nbsp; Priority  
+✅ Mark notification as read  
+✅ Protected Routes  
+✅ Smooth UX with alert feedback
