@@ -2,11 +2,13 @@
 
 A full-featured task management application built with **React + Vite**, styled using **Tailwind CSS** and **DaisyUI**, backed by **Express.js** and **MongoDB**. Users can create, update, delete, filter, and get notified about tasks in a clean and responsive UI.
 
+This is a full-stack project where users can create accounts and manage multiple shops. Each shop gets a **dynamic subdomain** like `http://beautyhub.localhost:5173`. The dashboard loads dynamically based on the subdomain, and session is maintained across subdomains using cookies.
+
 ---
 
-## Live Site: 
-## Client code: 
-## Server code: 
+## Live Site: https://popx-task.web.app/
+## Client code: https://github.com/ashikbillah699/9AM_solution_client
+## Server code: https://github.com/ashikbillah699/9AM_solution_server
 
 ---
 
@@ -31,16 +33,10 @@ A full-featured task management application built with **React + Vite**, styled 
 
 ## Features
 
-✅ User Authentication (Email based)  
-✅ Task Creation with Title, Description, Due Date, Priority, Status  
-✅ Real-Time Task Notifications (Unread badge)  
-✅ Update & Delete functionality  
-✅ Responsive UI (Mobile to Desktop)  
-✅ Filter tasks by:  
-&nbsp;&nbsp;&nbsp;&nbsp; Title or Description (Search)  
-&nbsp;&nbsp;&nbsp;&nbsp; Due Date  
-&nbsp;&nbsp;&nbsp;&nbsp; Status  
-&nbsp;&nbsp;&nbsp;&nbsp; Priority  
-✅ Mark notification as read  
-✅ Protected Routes  
-✅ Smooth UX with alert feedback
+- ✅ Register & Login with secure cookie-based authentication
+- ✅ Create and manage multiple shops per user
+- ✅ Subdomain-based shop dashboards (`shopName.localhost:5173`)
+- ✅ CRUD functionality for tasks
+- ✅ Task filtering and reminders
+- ✅ Auth session handling across subdomains
+- ✅ Responsive UI using Tailwind + DaisyUI
