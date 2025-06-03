@@ -8,7 +8,7 @@ import useNotification from '../hooks/useNotification';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-    const { setShowDashboard, showDashboard } = useContext(AuthContext)
+    const { setShowDashboard, showDashboard, user } = useContext(AuthContext)
     const [notifications,refetch] = useNotification();
     const unreadNotifications = notifications.filter(notification => !notification.isRead);
     refetch()
@@ -20,8 +20,8 @@ const Navbar = () => {
                         <a className="text-white text-2xl font-extrabold mr-8 md-mr-2">Task <span className='text-[#21587a]'>Flow</span></a>
                     </div>
                     <div className=" flex-1 lg:ml-16 md:ml-24 hidden md:block">
-                        {showDashboard ? <RxCross1 onClick={() => setShowDashboard(false)} className='text-white w-6 h-6' />
-                            : <CiMenuFries onClick={() => setShowDashboard(true)} className='text-white w-6 h-6' />
+                        {showDashboard ? <img src={`${user?.photoURL}`} onClick={() => setShowDashboard(false)} className='text-white w-9 h-9 rounded-full' />
+                            : <img src={`${user?.photoURL}`} onClick={() => setShowDashboard(true)} className='text-white w-9 h-9 rounded-full' />
                         }
                     </div>
                     <div className="flex-none mt-2">

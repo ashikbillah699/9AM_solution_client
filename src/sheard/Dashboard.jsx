@@ -3,13 +3,18 @@ import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
 import { AiFillDashboard } from 'react-icons/ai';
 import { IoIosCreate, IoIosNotifications } from 'react-icons/io';
-import { MdAssignment } from 'react-icons/md';
-import { HiUsers } from 'react-icons/hi';
 import { RiLogoutCircleFill } from 'react-icons/ri';
+import { FaShoppingCart } from 'react-icons/fa';
+import useUser from '../hooks/useUser';
 
 const Dashboard = () => {
     const { showDashboard, createLogOut, user } = useContext(AuthContext)
+    const [users] = useUser();
     const navigate = useNavigate()
+
+    const currentUser = users.find(u => u?.email == user?.email);
+    const shopNames = currentUser?.shopName || [];
+    // const cleanedShopName = sN.toLowerCase().replace(/\s+/g, '-');
 
     const handleLogout = () => {
         createLogOut();
@@ -30,6 +35,30 @@ const Dashboard = () => {
                         </div>
                     }
                     <ul className=" flex flex-col space-y-8 md:justify-start md:items-start items-center md:sticky top-44 py-5">
+                        {
+                            shopNames.map((sN, inx) => {
+                                return (
+                                    <React.Fragment key={inx}>
+                                        <li>
+                                            <a
+                                              href={`http://${sN.toLowerCase().replace(/\s+/g, '')}.localhost:5173`}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="text-xl hover:text-[#21587a] text-white duration-300 flex items-center justify-start gap-3"
+                                            >
+                                                <span className="min-w-[32px] flex justify-center">
+                                                    <FaShoppingCart /> {inx + 1}
+                                                </span>
+                                                <span className="whitespace-nowrap md:inline-block">
+                                                    {showDashboard && sN}
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </React.Fragment>
+                                )
+                            })
+                        }
+                        <div className="divider divider-primary"></div>
                         <li>
                             <NavLink to='dashboardHome'
                                 className="text-xl hover:text-[#21587a] text-white duration-300 flex items-center justify-start gap-3">

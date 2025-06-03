@@ -4,9 +4,9 @@ A full-featured task management application built with **React + Vite**, styled 
 
 ---
 
-## Live Site: https://popx-task.web.app/
-## Client code: https://github.com/ashikbillah699/TaskFlow
-## Server code: https://github.com/ashikbillah699/Task_Flow_server
+## Live Site: 
+## Client code: 
+## Server code: 
 
 ---
 

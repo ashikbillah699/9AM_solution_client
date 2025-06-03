@@ -4,7 +4,7 @@ const useTasks = () => {
     const { data: tasks = [],  refetch} = useQuery({
         queryKey: ['tasks'],
         queryFn: async () => {
-            const res = await fetch(`https://task-flow-server-pearl.vercel.app/tasks`);
+            const res = await fetch(`http://localhost:5000/tasks`);
             const data = await res.json();
             return data;
         },

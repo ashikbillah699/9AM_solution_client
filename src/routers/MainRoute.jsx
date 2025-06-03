@@ -9,6 +9,7 @@ import AssignedTasks from "../pages/dashboard/assignedTasks/AssignedTasks";
 import OverdueTasks from "../pages/dashboard/overdueTasks/OverdueTasks";
 import EditTask from "../pages/dashboard/createdTasks/EditTask";
 import Notifications from "../pages/Notifications";
+import SessionCheckerRoute from "./SessionCheckerRoute";
 
 const route = createBrowserRouter([
     {
@@ -21,7 +22,7 @@ const route = createBrowserRouter([
     },
     {
         path: '/mainLayout',
-        element: <MainLayout></MainLayout>,
+        element: <SessionCheckerRoute><MainLayout></MainLayout></SessionCheckerRoute>,
         children: [
             {
                 path: '/mainLayout/dashboardHome',

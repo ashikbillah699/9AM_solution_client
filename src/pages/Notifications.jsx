@@ -8,7 +8,7 @@ const Notifications = () => {
 
     const handleClick = async (id) => {
         try {
-            const response = await fetch(`https://task-flow-server-pearl.vercel.app/notification/${id}`, {
+            const response = await fetch(`http://localhost:5000/notification/${id}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json',
