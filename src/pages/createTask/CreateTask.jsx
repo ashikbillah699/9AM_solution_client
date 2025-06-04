@@ -23,7 +23,7 @@ const CreateTask = () => {
         const taskData = { title, description, dueDate, priority, status, assignedEmail, userEmail };
 
         try {
-            const res = await fetch(`https://task-flow-server-1jt0xn5sm-ashikbillah699s-projects.vercel.app/task`, {
+            const res = await fetch(`https://task-flow-server-pearl.vercel.app/task`, {
                 method: "POST",
                 headers: {
                     'content-type': 'application/json'
