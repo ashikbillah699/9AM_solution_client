@@ -6,6 +6,7 @@ import { IoIosCreate, IoIosNotifications } from 'react-icons/io';
 import { RiLogoutCircleFill } from 'react-icons/ri';
 import { FaShoppingCart } from 'react-icons/fa';
 import useUser from '../hooks/useUser';
+import Swal from 'sweetalert2';
 
 const Dashboard = () => {
     const { showDashboard, createLogOut, user } = useContext(AuthContext)
@@ -14,11 +15,34 @@ const Dashboard = () => {
 
     const currentUser = users.find(u => u?.email == user?.email);
     const shopNames = currentUser?.shopName || [];
-    // const cleanedShopName = sN.toLowerCase().replace(/\s+/g, '-');
+
+    const navigateToShop = (shopName) => {
+        // window.location.href = `http://${shopName}.localhost:5173`;
+        const url = `http://${shopName}.localhost:5173`;
+        window.open(url, '_blank');
+    };
 
     const handleLogout = () => {
-        createLogOut();
-        navigate('/')
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to log out!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, log out of it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "log out",
+                    text: "You have been logged out.",
+                    icon: "success"
+                });
+                createLogOut();
+                navigate('/')
+            }
+        });
+
     }
 
     return (
@@ -34,15 +58,14 @@ const Dashboard = () => {
                             <p className='text-center text-white font-bold mt-1'>{user?.displayName}</p>
                         </div>
                     }
-                    <ul className=" flex flex-col space-y-8 md:justify-start md:items-start items-center md:sticky top-44 py-5">
+                    <ul className=" flex flex-col space-y-6 md:justify-start md:items-start items-center md:sticky top-44 py-1">
                         {
                             shopNames.map((sN, inx) => {
                                 return (
                                     <React.Fragment key={inx}>
                                         <li>
                                             <a
-                                              href={`http://${sN.toLowerCase().replace(/\s+/g, '')}.localhost:5173`}
-                                                target="_blank"
+                                                onClick={() => navigateToShop(sN.toLowerCase().replace(/\s+/g))}
                                                 rel="noreferrer"
                                                 className="text-xl hover:text-[#21587a] text-white duration-300 flex items-center justify-start gap-3"
                                             >

@@ -28,6 +28,7 @@ This is a full-stack project where users can create accounts and manage multiple
 - Express.js
 - MongoDB
 - CORS & dotenv
+- jwt
 
 ---
 
@@ -35,7 +36,10 @@ This is a full-stack project where users can create accounts and manage multiple
 
 - ✅ Register & Login with secure cookie-based authentication
 - ✅ Create and manage multiple shops per user
-- ✅ Subdomain-based shop dashboards (`shopName.localhost:5173`)
+- ✅If “Remember Me” is checked, session lasts 7 days; otherwise, it expires after 30 minutes.
+- ✅ Subdomain-based shop dashboards with token (`shopName.localhost:5173`)
+
+## Extra Features
 - ✅ CRUD functionality for tasks
 - ✅ Task filtering and reminders
 - ✅ Auth session handling across subdomains

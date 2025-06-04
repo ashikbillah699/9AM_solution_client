@@ -1,6 +1,5 @@
 
 import { useContext } from 'react';
-import { CiMenuFries } from 'react-icons/ci';
 import { AuthContext } from '../provider/AuthProvider';
 import { RxCross1 } from 'react-icons/rx';
 import { IoIosNotifications } from 'react-icons/io';
@@ -20,7 +19,7 @@ const Navbar = () => {
                         <a className="text-white text-2xl font-extrabold mr-8 md-mr-2">Task <span className='text-[#21587a]'>Flow</span></a>
                     </div>
                     <div className=" flex-1 lg:ml-16 md:ml-24 hidden md:block">
-                        {showDashboard ? <img src={`${user?.photoURL}`} onClick={() => setShowDashboard(false)} className='text-white w-9 h-9 rounded-full' />
+                        {showDashboard ? <RxCross1 onClick={() => setShowDashboard(false)} className='text-white w-7 h-7 rounded-full' />
                             : <img src={`${user?.photoURL}`} onClick={() => setShowDashboard(true)} className='text-white w-9 h-9 rounded-full' />
                         }
                     </div>

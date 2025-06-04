@@ -12,7 +12,6 @@ const useNotification = () => {
             return res.json();
         },
     });
-    console.log(notifications)
     return [notifications, refetch];
 };
 

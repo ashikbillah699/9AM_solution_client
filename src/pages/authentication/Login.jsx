@@ -3,55 +3,53 @@ import loginBg from '../../assets/loginBg.jpg'
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 import Swal from 'sweetalert2';
-import { browserLocalPersistence, browserSessionPersistence, getAuth, setPersistence } from 'firebase/auth';
 
 const Login = () => {
-    const { createLogin } = useContext(AuthContext);
-    const navigate = useNavigate();
-    const auth = getAuth();
-    const [remember, setRemember] = useState(false);
+    const { createLogin, getSubdomain } = useContext(AuthContext);
+    const [rememberMe, setRememberMe] = useState(false);
+    const navigate = useNavigate()
+
+
+    const shop = getSubdomain();
+    if (shop && shop !== 'localhost') {
+        return <h1 className="text-center text-3xl mt-20">This is {shop} shop</h1>;
+    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
 
-        const persistenceType = remember ? browserLocalPersistence : browserSessionPersistence;
-
         try {
-            await setPersistence(auth, persistenceType);
-            const res = await createLogin(email, password);
-
-            if (res.user) {
-                if (!remember) {
-                    const expireTime = new Date().getTime() + 30 * 60 * 1000;
-                    sessionStorage.setItem('expireAt', expireTime);
-                }
-
-                const token = await res.user.getIdToken();
-                localStorage.setItem('token', token);
-
+            const res = await createLogin(email, password, rememberMe)
+            console.log(res.user);
+            if (res?.user) {
                 Swal.fire({
                     position: "center",
                     icon: "success",
-                    title: "Welcome back to TaskFlow.",
+                    title: "Successfully login!",
                     showConfirmButton: false,
-                    timer: 1400
+                    timer: 1500
                 });
-                event.target.reset();
-                navigate('/mainLayout/createTask');
+                navigate('/mainLayout/dashboardHome')
             }
-        } 
-        
+            else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Login failed, please try again!"
+                });
+                navigate('/')
+            }
+
+        }
         catch (err) {
             Swal.fire({
                 icon: "error",
-                title: "Login failed",
-                text: err.message
+                title: "Oops...",
+                text: `${err.message}`
             });
         }
-
-        
 
     };
 
@@ -105,9 +103,9 @@ const Login = () => {
                         <div>
                             <input
                                 type="checkbox"
-                                checked={remember}
+                                checked={rememberMe}
                                 className="checkbox"
-                                onChange={(e) => setRemember(e.target.checked)} />
+                                onChange={(e) => setRememberMe(e.target.checked)} />
                             <label className="text-sm font-medium text-gray-600 mb-1">
                                 Remember me
                             </label>

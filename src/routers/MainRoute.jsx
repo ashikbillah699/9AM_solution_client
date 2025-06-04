@@ -9,7 +9,8 @@ import AssignedTasks from "../pages/dashboard/assignedTasks/AssignedTasks";
 import OverdueTasks from "../pages/dashboard/overdueTasks/OverdueTasks";
 import EditTask from "../pages/dashboard/createdTasks/EditTask";
 import Notifications from "../pages/Notifications";
-import SessionCheckerRoute from "./SessionCheckerRoute";
+import PrivetRoute from "./PrivetRoute";
+// import SessionCheckerRoute from "./SessionCheckerRoute";
 
 const route = createBrowserRouter([
     {
@@ -22,7 +23,7 @@ const route = createBrowserRouter([
     },
     {
         path: '/mainLayout',
-        element: <SessionCheckerRoute><MainLayout></MainLayout></SessionCheckerRoute>,
+        element: <PrivetRoute><MainLayout></MainLayout></PrivetRoute>,
         children: [
             {
                 path: '/mainLayout/dashboardHome',
