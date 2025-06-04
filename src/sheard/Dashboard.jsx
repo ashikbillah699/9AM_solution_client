@@ -17,7 +17,6 @@ const Dashboard = () => {
     const shopNames = currentUser?.shopName || [];
 
     const navigateToShop = (shopName) => {
-        // window.location.href = `http://${shopName}.localhost:5173`;
         const url = `http://${shopName}.localhost:5173`;
         window.open(url, '_blank');
     };

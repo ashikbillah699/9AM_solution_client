@@ -1,10 +1,8 @@
-// import { useEffect, useState } from 'react';
-// import axios from 'axios';
+
 
 const Shops = () => {
-   const hostname = window.location.hostname; // যেমন: beautyhub.localhost
+   const hostname = window.location.hostname; 
   const shopName = hostname.split('.')[0];
-//   const [loading, setLoading] = useState(true);
 //   const [shopName, setShopName] = useState('');
 //   const [error, setError] = useState(false);
 
