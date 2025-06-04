@@ -8,7 +8,7 @@ const useNotification = () => {
     const { data: notifications = [], refetch } = useQuery({
         queryKey: ['notifications', user?.email],
         queryFn: async () => {
-            const res = await fetch(`https://task-flow-server-pearl.vercel.app/notifications?email=${user.email}`);
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/notifications?email=${user.email}`);
             return res.json();
         },
     });

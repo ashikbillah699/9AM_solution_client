@@ -40,7 +40,7 @@ const CreatedTasks = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await fetch(`https://task-flow-server-pearl.vercel.app/task/${id}`, {
+                    await fetch(`${import.meta.env.VITE_API_URL}/task/${id}`, {
                         method: 'DELETE',
                         headers: {
                             'content-type': 'application/json'

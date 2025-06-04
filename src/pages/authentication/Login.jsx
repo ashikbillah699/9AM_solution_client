@@ -5,15 +5,12 @@ import { AuthContext } from '../../provider/AuthProvider';
 import Swal from 'sweetalert2';
 
 const Login = () => {
-    const { createLogin, getSubdomain } = useContext(AuthContext);
+    const { createLogin } = useContext(AuthContext);
     const [rememberMe, setRememberMe] = useState(false);
     const navigate = useNavigate()
 
 
-    const shop = getSubdomain();
-    if (shop && shop !== 'localhost') {
-        return <h1 className="text-center text-3xl mt-20">This is {shop} shop</h1>;
-    }
+   
 
     const handleSubmit = async (event) => {
         event.preventDefault();

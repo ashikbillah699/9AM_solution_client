@@ -22,7 +22,7 @@ const EditTask = () => {
         const updatedTaskData = { title, description, dueDate, priority, status, assignedEmail, userEmail };
 
         try {
-            const response = await fetch(`https://task-flow-server-pearl.vercel.app/task/${task._id}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/task/${task._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

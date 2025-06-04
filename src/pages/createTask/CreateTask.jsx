@@ -23,7 +23,7 @@ const CreateTask = () => {
         const taskData = { title, description, dueDate, priority, status, assignedEmail, userEmail };
 
         try {
-            const res = await fetch(`https://task-flow-server-pearl.vercel.app/task`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/task`, {
                 method: "POST",
                 headers: {
                     'content-type': 'application/json'
@@ -49,7 +49,7 @@ const CreateTask = () => {
                     title
                   };
 
-                await fetch(`http://localhost:5000/notifications/${user?.email}`, {
+                await fetch(`${import.meta.env.VITE_API_URL}/notifications/${user?.email}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(notificationData), 

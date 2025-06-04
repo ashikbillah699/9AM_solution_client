@@ -10,7 +10,6 @@ import OverdueTasks from "../pages/dashboard/overdueTasks/OverdueTasks";
 import EditTask from "../pages/dashboard/createdTasks/EditTask";
 import Notifications from "../pages/Notifications";
 import PrivetRoute from "./PrivetRoute";
-// import SessionCheckerRoute from "./SessionCheckerRoute";
 
 const route = createBrowserRouter([
     {
